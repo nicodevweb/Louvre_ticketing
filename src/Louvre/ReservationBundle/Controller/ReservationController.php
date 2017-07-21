@@ -2,12 +2,15 @@
 
 namespace Louvre\ReservationBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class ReservationController
+class ReservationController extends Controller
 {
 	public function indexAction()
 	{
-		return new Response('Le "Hello World !" du bundle');
+		$content = $this->get('templating')->render('LouvreReservationBundle:Reservation:index.html.twig');
+
+		return new Response($content);
 	}
 }

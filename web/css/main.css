@@ -1,0 +1,49 @@
+/*
+	FILE Louvre_ticketing/web/css/main.css
+
+	===================================================
+
+	Main style definition for Louvre_ticketing application
+*/
+
+/* Style definitions of application main elements */
+
+h1
+{
+	margin-bottom: 20px;
+}
+
+.row-bordered
+{
+	border-bottom: solid 1px #222222;
+	padding-bottom: 20px;
+}
+
+.container-small
+{
+	margin: auto;
+	width : 80%;
+}
+
+.starter-link
+{
+	background-color: #c9ac00;
+	color : #ffffff;
+	font-size : 1.5em;
+	margin-top : 150px;
+	line-height: 80px;
+	text-decoration : none;
+}
+
+.starter-link:hover
+{
+	color: #ffffff;
+	background-color: #b99e00;
+	text-decoration: none;
+}
+
+.starter-link img
+{
+	margin-right : 20px;
+	width : 8%;
+}
