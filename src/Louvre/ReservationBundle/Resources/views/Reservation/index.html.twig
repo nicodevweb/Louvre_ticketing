@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'LouvreReservationBundle:Reservation:layout.html.twig' %}
 
-		<!-- Bootstrap -->
-		<link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
-		<!-- Main CSS -->
-		<link href="{{ asset('css/main.css') }}" rel="stylesheet">
-
-		<title>Louvre - Billetterie</title>
-	</head>
-
-	<body>
+{% block content %}
 		<div class="container">
 			<div class="row row-bordered">
 				<div class="container-small">
@@ -34,9 +13,7 @@
 			</div><!-- head row -->
 
 			<div class="row">
-				<a href="#" class="col-xs-12 col-md-6 col-md-offset-3 text-center starter-link"><img src="{{ asset('images/ticket.png') }}" title="Réservez ce billet !" alt="Icône de ticket">Réserver mon billet !</a>
+				<a href="{{ path('louvre_reservation_calendar') }}" class="col-xs-12 col-md-6 col-md-offset-3 text-center starter-link"><img src="{{ asset('images/ticket.png') }}" title="Réservez ce billet !" alt="Icône de ticket">Réserver mon billet !</a>
 			</div>
 		</div><!-- container -->
-
-	</body>
-</html>
+{% endblock %}

@@ -9,8 +9,11 @@ class ReservationController extends Controller
 {
 	public function indexAction()
 	{
-		$content = $this->get('templating')->render('LouvreReservationBundle:Reservation:index.html.twig');
+		return $this->render('LouvreReservationBundle:Reservation:index.html.twig');
+	}
 
-		return new Response($content);
+	public function calendarAction()
+	{
+		return $this->render('LouvreReservationBundle:Reservation:calendar.html.twig');
 	}
 }

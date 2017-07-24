@@ -1,0 +1,36 @@
+{% extends 'LouvreReservationBundle:Reservation:layout.html.twig' %}
+
+{% block title %}- Choix de la date{% endblock %}
+
+{% block content %}
+		<div class="container">
+			<div class="row row-bordered">
+				<div class="container-small">
+					<h1 class="text-center">Choix de la date</h1>
+					<p class="text-center">
+						Sélectionnez la date à laquelle vous souhaitez visiter le Louvre. Vous pourrez alors choisir un billet pour la journée ou la demi journée.<br>
+						Les journées non sélectionnables correspondent aux jours fériés et aux jours où le musée sera complet.
+					</p>
+				</div>
+			</div><!-- head row -->
+
+			<div class="row">
+				<form class="datepicker-center">
+					<div class="form-group">
+						<div id="datepicker"></div>
+						<br>
+						<input type="hidden" id="date" name="date">
+					</div>
+					<button type="submit" id="fullDay" name="fullDay" disabled>
+						<img src="{{ asset('images/chronometer.png') }}">
+						Journée
+					</button>
+					<button type="submit" name="halfDay">
+						<img src="{{ asset('images/half-an-hour.png') }}">
+						Demi-journée
+					</button>
+				</form>
+			</div>
+
+		</div><!-- container -->
+{% endblock %}
