@@ -60,9 +60,9 @@ class Ticket
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Reservation")
-     * @ORM\Column(name="reservation", type="object")
+     * @ORM\Column(name="reservation_id", type="integer")
      */
-    private $reservation;
+    private $reservationId;
 
 
     /**
@@ -196,27 +196,27 @@ class Ticket
     }
 
     /**
-     * Set reservation
+     * Set reservationId
      *
      * @param \stdClass $reservation
      *
      * @return Ticket
      */
-    public function setReservation(Reservation $reservation)
+    public function setReservationId($reservationId)
     {
-        $this->reservation = $reservation;
+        $this->reservationId = $reservationId;
 
         return $this;
     }
 
     /**
-     * Get reservation
+     * Get reservationId
      *
      * @return \stdClass
      */
-    public function getReservation()
+    public function getReservationId()
     {
-        return $this->reservation;
+        return $this->reservationId;
     }
 }
 
