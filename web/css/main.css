@@ -128,3 +128,57 @@ h1
 	border: none;
 	cursor: pointer;
 }
+
+/* Style definitions of application ticketing page */
+
+.h2-container-center
+{
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.reduction-price-checkbox label
+{
+	font-weight: normal;
+}
+
+.ticketing-center
+{	
+	display: table;
+	margin: auto;
+	margin-bottom: 20px;
+	width: 80%;
+}
+
+.table-row
+{
+	display: table-row;
+	line-height: 40px
+}
+
+.ticketing-submit-container
+{
+	text-align: center;
+	margin-top: 70px;
+}
+
+.ticketing-submit-container input[type="submit"]
+{
+	background-color: #c9ac00;
+	background-image: url('../images/shopping-basket.png');
+	background-size: 12%;
+	background-position: 8% 50%;
+	background-repeat: no-repeat;
+	border: none;
+	border-radius: 0;
+	color: #ffffff;
+	font-size: 1.7em;
+	margin-right: -4px;
+	padding: 20px 20px 20px 80px;
+}
+
+.ticketing-submit-container input[type="submit"]:hover, .ticketing-submit-container input[type="submit"]:focus
+{
+	background-color: #b99e00;
+	color: #ffffff;
+}

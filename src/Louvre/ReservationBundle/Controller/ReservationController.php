@@ -3,7 +3,9 @@
 namespace Louvre\ReservationBundle\Controller;
 
 use Louvre\ReservationBundle\Entity\Reservation;
+use Louvre\ReservationBundle\Entity\Ticket;
 use Louvre\ReservationBundle\Form\ReservationType;
+use Louvre\ReservationBundle\Form\TicketType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,6 +48,18 @@ class ReservationController extends Controller
 
 	public function ticketingAction(Request $request)
 	{
-		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig');
+		// Ticket object is created
+		$ticket = new Ticket();
+
+		// Ticketing view reservation form, based on Reservation object's session
+		$reservationForm = $this->createForm(ReservationType::class, $request->getSession()->get('reservation'), array('ticket' => true));
+
+		// Ticketing view ticket form
+		$ticketForm = $this->createForm(TicketType::class, $ticket);
+
+		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig', array(
+			'reservationForm' => $reservationForm->createView(),
+			'ticketForm' => $ticketForm->createView()
+		));
 	}
 }

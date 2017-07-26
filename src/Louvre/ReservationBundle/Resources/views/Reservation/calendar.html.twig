@@ -25,11 +25,11 @@
 						{{ form_widget(form.date, { 'id': 'date' }) }}
 						{{ form_errors(form.date) }}
 					</div>
-					{{ form_widget(form.fullDay, { 'id': 'fullDay', 'attr': { 'class': 'datepicker-submit full-day', 'disabled': 'disabled', 'img': ' {{ asset("images/chronometer.png") }} ' } }) }}
+					{{ form_widget(form.fullDay, { 'id': 'fullDay', 'attr': { 'class': 'datepicker-submit full-day', 'disabled': 'disabled' } }) }}
 					{{ form_widget(form.halfDay, { 'attr': { 'class': 'datepicker-submit half-day' } }) }}
 
 				{{ form_end(form) }}
-			</div>
+			</div><!-- form row -->
 
 		</div><!-- container -->
 {% endblock %}

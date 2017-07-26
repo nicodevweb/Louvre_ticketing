@@ -4,6 +4,7 @@
 
 {% block content %}
 		<div class="container">
+
 			<div class="row row-bordered">
 				<div class="container-small">
 					<h1 class="text-center">Informations</h1>
@@ -14,6 +15,81 @@
 					</p>
 				</div>
 			</div><!-- head row -->
+
+			<div class="row">
+				<div class="h2-container-center">
+					<h2>Adresse de réception de vos billets</h2>
+				</div>
+
+				{{ form_start(reservationForm,{ 'attr': { 'class': 'ticketing-center form-horizontal' } }) }}
+
+					<div class="form-group">
+						<label class="control-label col-md-2">Date sélectionnée :</label>
+						<div class="col-md-10">
+							<span class="form-control">{{ app.session.get('reservation').date }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						{{ form_label(reservationForm.email, 'Adresse e-mail :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
+						{{ form_errors(reservationForm.email) }}
+						<div class="col-md-10">
+							{{ form_widget(reservationForm.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre adresse e-mail ...' } }) }}
+						</div>
+					</div>
+
+				{{ form_end(reservationForm) }}
+			</div><!-- reservation row -->
+
+			<div class="row">
+				<div class="h2-container-center">
+					<h2>Informations à fournir</h2>
+				</div>
+
+				{{ form_start(ticketForm, { 'attr': { 'class': 'ticketing-center form-horizontal' } }) }}
+
+					<div class="form-group">
+						{{ form_label(ticketForm.lastName, 'Nom :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
+						{{ form_errors(ticketForm.lastName) }}
+						<div class="col-md-10">
+							{{ form_widget(ticketForm.lastName, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre nom ...' } }) }}
+						</div>						
+					</div>
+					<div class="form-group">
+						{{ form_label(ticketForm.firstName, 'Prénom :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
+						{{ form_errors(ticketForm.firstName) }}
+						<div class="col-md-10">
+							{{ form_widget(ticketForm.firstName, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre prénom ...' } }) }}
+						</div>						
+					</div>
+					<div class="form-group">
+						{{ form_label(ticketForm.country, 'Pays :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
+						{{ form_errors(ticketForm.country) }}
+						<div class="col-md-10">
+							{{ form_widget(ticketForm.country, { 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre pays de résidence ...' } }) }}
+						</div>						
+					</div>
+					<div class="form-group">
+						{{ form_label(ticketForm.birthDate, 'Date de naissance :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
+						{{ form_errors(ticketForm.birthDate) }}
+						<div class="col-md-10">
+							{{ form_widget(ticketForm.birthDate, { 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre date de naissance ...' } }) }}
+						</div>						
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<div class="reduction-price-checkbox">
+								{{ form_widget(ticketForm.reducedPrice, { 'id': 'datepicker' }) }}
+								{{ form_label(ticketForm.reducedPrice, 'Bénéficiez-vous d\'un tarif réduit ? *') }}								
+							</div>
+						</div>
+					</div>
+
+				{{ form_end(ticketForm) }}
+
+				<div class="ticketing-submit-container">
+					<input type="submit" value="Confirmer ma commande">
+				</div>
+			</div><!-- ticket row -->
 
 		</div><!-- container -->
 {% endblock %}
