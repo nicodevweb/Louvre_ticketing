@@ -15,21 +15,20 @@
 			</div><!-- head row -->
 
 			<div class="row">
-				<form class="datepicker-center">
+				{# Symfony form object view made by hand #}
+				{{ form_start(form, { 'attr': { 'class': 'datepicker-center' } }) }}
+
+					{# Bursted field generation #}
 					<div class="form-group">
 						<div id="datepicker"></div>
 						<br>
-						<input type="hidden" id="date" name="date">
+						{{ form_widget(form.date, { 'id': 'date' }) }}
+						{{ form_errors(form.date) }}
 					</div>
-					<button type="submit" id="fullDay" name="fullDay" disabled>
-						<img src="{{ asset('images/chronometer.png') }}">
-						Journée
-					</button>
-					<button type="submit" name="halfDay">
-						<img src="{{ asset('images/half-an-hour.png') }}">
-						Demi-journée
-					</button>
-				</form>
+					{{ form_widget(form.fullDay, { 'id': 'fullDay', 'attr': { 'class': 'datepicker-submit full-day', 'disabled': 'disabled', 'img': ' {{ asset("images/chronometer.png") }} ' } }) }}
+					{{ form_widget(form.halfDay, { 'attr': { 'class': 'datepicker-submit half-day' } }) }}
+
+				{{ form_end(form) }}
 			</div>
 
 		</div><!-- container -->
