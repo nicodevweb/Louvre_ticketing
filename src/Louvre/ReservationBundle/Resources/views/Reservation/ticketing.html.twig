@@ -72,13 +72,13 @@
 						{{ form_label(ticketForm.birthDate, 'Date de naissance :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
 						{{ form_errors(ticketForm.birthDate) }}
 						<div class="col-md-10">
-							{{ form_widget(ticketForm.birthDate, { 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre date de naissance ...' } }) }}
+							{{ form_widget(ticketForm.birthDate, { 'id': 'datepicker', 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre date de naissance ...' } }) }}
 						</div>						
 					</div>
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-10">
 							<div class="reduction-price-checkbox">
-								{{ form_widget(ticketForm.reducedPrice, { 'id': 'datepicker' }) }}
+								{{ form_widget(ticketForm.reducedPrice) }}
 								{{ form_label(ticketForm.reducedPrice, 'Bénéficiez-vous d\'un tarif réduit ? *') }}								
 							</div>
 						</div>
