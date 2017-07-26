@@ -35,12 +35,17 @@ class ReservationController extends Controller
 			$session->set('reservation', $reservation);
 
 			// Redirection to ticket infos' page
-			// return $this->redirectToRoute('LouvreReservationBundle:Reservation:ticket.html.twig');
+			return $this->redirectToRoute('louvre_reservation_ticketing');
 		}
 
 		// Method createView()  is used so the form will be added to view
 		return $this->render('LouvreReservationBundle:Reservation:calendar.html.twig', array(
 			'form' =>$form->createView(),
 		));
+	}
+
+	public function ticketingAction(Request $request)
+	{
+		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig');
 	}
 }

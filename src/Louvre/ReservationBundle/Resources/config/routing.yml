@@ -7,3 +7,8 @@ louvre_reservation_calendar:
     path:     /calendar
     defaults:
         _controller: LouvreReservationBundle:Reservation:calendar
+
+louvre_reservation_ticketing:
+    path:     /ticketing
+    defaults:
+        _controller: LouvreReservationBundle:Reservation:ticketing
