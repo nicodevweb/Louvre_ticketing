@@ -3,9 +3,10 @@
 namespace Louvre\ReservationBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Intl\Intl; // Language bundle
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,7 @@ class TicketType extends AbstractType
             ->add('firstName',      TextType::class)
             ->add('lastName',       TextType::class)
             ->add('country',        CountryType::class, array('placeholder' => 'Sélectionnez votre pays de résidence ...'))
-            ->add('birthDate',      TextType::class)
+            ->add('birthDate',      HiddenType::class)
             ->add('reducedPrice',   CheckboxType::class, array('required' => false))
         ;
     }

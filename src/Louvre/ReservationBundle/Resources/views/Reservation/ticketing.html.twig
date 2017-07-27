@@ -26,7 +26,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2">Date sélectionnée :</label>
 						<div class="col-md-10">
-							<span class="form-control">{{ app.session.get('reservation').date }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}</span>
+							<span class="form-control">Le {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}</span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -72,7 +72,8 @@
 						{{ form_label(ticketForm.birthDate, 'Date de naissance :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
 						{{ form_errors(ticketForm.birthDate) }}
 						<div class="col-md-10">
-							{{ form_widget(ticketForm.birthDate, { 'id': 'datepicker', 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre date de naissance ...' } }) }}
+							<input type="text" id="datepickerTicket" class="form-control" placeholder="Sélectionnez votre date de naissance ..." readonly>
+							{{ form_widget(ticketForm.birthDate, { 'id': 'altDatepickerTicket', 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre date de naissance ...' } }) }}
 						</div>						
 					</div>
 					<div class="form-group">

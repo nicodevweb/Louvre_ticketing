@@ -8,9 +8,29 @@
 
 /* Style definitions of application main elements */
 
+div.ui-datepicker
+{
+	font-size: 2.5em;
+}
+
+select.ui-datepicker-month, select.ui-datepicker-year
+{
+	color: #000000;
+}
+
 h1
 {
 	margin-bottom: 20px;
+}
+
+input[type="text"]:-moz-read-only { /* For Firefox */
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+input[type="text"]:read-only { 
+    background-color: #FFFFFF;
+    cursor: pointer;
 }
 
 .row-bordered
@@ -59,7 +79,6 @@ h1
 .datepicker-center #datepicker
 {
 	display: inline-block;
-	font-size: 2.5em;
 }
 
 .datepicker-submit
