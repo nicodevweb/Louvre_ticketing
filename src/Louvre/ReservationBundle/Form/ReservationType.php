@@ -2,11 +2,13 @@
 
 namespace Louvre\ReservationBundle\Form;
 
+use Louvre\ReservationBundle\Form\TicketType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,13 +29,21 @@ class ReservationType extends AbstractType
             ;           
         }
 
+        // Form for ticket registration view
         if ($options['ticket'])
         {
-            $builder->add('email',  TextType::class, array('required' => true));
+            $builder
+                ->add('email',  TextType::class, array('required' => true))
+                // Collection TicketType form included in Reservation form
+                ->add('tickets', CollectionType::class, array(
+                    'entry_type' => TicketType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true
+                ))
+                ->add('confirm',    SubmitType::class, array('label' => 'Confirmer ma commande'))
+            ;
         }
-
-
-        // Form for ticket registration view
     }
     
     /**

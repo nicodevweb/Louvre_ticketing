@@ -2,6 +2,7 @@
 
 namespace Louvre\ReservationBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +42,16 @@ class Reservation
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+
+    /**
+     * @var array
+     */
+    private $tickets;
+
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
 
 
     /**
@@ -124,5 +135,14 @@ class Reservation
     {
         return $this->email;
     }
-}
 
+    /**
+     * Get tickets
+     *
+     * @return array
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+}

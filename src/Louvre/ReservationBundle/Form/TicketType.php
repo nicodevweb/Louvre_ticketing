@@ -5,6 +5,7 @@ namespace Louvre\ReservationBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,11 +23,31 @@ class TicketType extends AbstractType
         \Locale::setDefault('fr');
 
         $builder
-            ->add('firstName',      TextType::class)
-            ->add('lastName',       TextType::class)
-            ->add('country',        CountryType::class, array('placeholder' => 'Sélectionnez votre pays de résidence ...'))
-            ->add('birthDate',      HiddenType::class)
-            ->add('reducedPrice',   CheckboxType::class, array('required' => false))
+            ->add('firstName',      TextType::class, array(
+                'label' => 'Prénom :',
+                'attr' => array(
+                    'placeholder' => 'Sélectionnez votre prénom ...'
+                )                
+            ))
+            ->add('lastName',       TextType::class, array(
+                'label' => 'Nom :',
+                'attr' => array(
+                    'placeholder' => 'Sélectionnez votre nom ...'
+                )      
+            ))
+            ->add('country',        CountryType::class, array(
+                'label' => 'Pays :',
+                'placeholder' => 'Sélectionnez votre pays de résidence ...'           
+            ))
+            ->add('birthDate',      DateType::class, array(
+                'label' => 'Date de naissance :',
+                'attr' => array(
+                    'class' => 'datepickerTicket')
+            ))
+            ->add('reducedPrice',   CheckboxType::class, array(
+                'label' => 'Je bénéficie d\'un tarif réduit *',
+                'required' => false
+            ))
         ;
     }
     

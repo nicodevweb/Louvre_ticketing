@@ -181,7 +181,7 @@ input[type="text"]:read-only {
 	margin-top: 70px;
 }
 
-.ticketing-submit-container input[type="submit"]
+.ticketing-submit
 {
 	background-color: #c9ac00;
 	background-image: url('../images/shopping-basket.png');
@@ -196,7 +196,7 @@ input[type="text"]:read-only {
 	padding: 20px 20px 20px 80px;
 }
 
-.ticketing-submit-container input[type="submit"]:hover, .ticketing-submit-container input[type="submit"]:focus
+.ticketing-submit:hover, .ticketing-submit:focus
 {
 	background-color: #b99e00;
 	color: #ffffff;
