@@ -48,18 +48,21 @@ class ReservationController extends Controller
 
 	public function ticketingAction(Request $request)
 	{
-		// Ticket object is created
-		$ticket = new Ticket();
-
 		// Ticketing view reservation form, based on Reservation object's session
 		$reservationForm = $this->createForm(ReservationType::class, $request->getSession()->get('reservation'), array('ticket' => true));
 
-		// Ticketing view ticket form
-		$ticketForm = $this->createForm(TicketType::class, $ticket);
+		// // Ticketing view ticket form
+		// $ticketForm = $this->createForm(TicketType::class, $ticket);
+
+		if ($request->isMethod('POST') && $reservationForm->handleRequest($request)->isValid())
+		{
+			// Hydrate email in Reservation object
+			var_dump($request->getSession()->get('reservation'));
+		}
 
 		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig', array(
 			'reservationForm' => $reservationForm->createView(),
-			'ticketForm' => $ticketForm->createView()
+			// 'ticketForm' => $ticketForm->createView()
 		));
 	}
 }
