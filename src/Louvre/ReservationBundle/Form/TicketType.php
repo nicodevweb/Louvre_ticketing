@@ -41,7 +41,12 @@ class TicketType extends AbstractType
             ))
             ->add('birthDate',      DateType::class, array(
                 'label' => 'Date de naissance :',
-                'years' => range(1900,2017),
+                'placeholder' => array(
+                    'year' => 'Année',
+                    'month' => 'Mois',
+                    'day' => 'Jour'
+                ),
+                'years' => range(date('Y')-100, date('Y')),
                 'attr' => array(
                     'class' => 'datepickerTicket')
             ))

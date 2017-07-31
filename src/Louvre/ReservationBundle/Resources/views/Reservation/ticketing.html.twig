@@ -21,6 +21,7 @@
 					<h2>Adresse de réception de vos billets</h2>
 				</div>
 
+				{# Bootstrap form theme declaration for reservationForm #}
 				{% form_theme reservationForm 'LouvreReservationBundle:Form:bootstrap_theme.html.twig' %}
 
 				{{ form_start(reservationForm,{ 'attr': { 'class': 'ticketing-center form-horizontal' } }) }}
@@ -45,84 +46,12 @@
 
 					{{ form_widget(reservationForm.tickets) }}
 
-					{# 1- La plus aboutie : remplace la macro utilisée en incluant le template du formulaire dans le data-prototype #}
-					{# 
-						Problèmes :	- En POST, je ne trouve pas mes objets hydratés issus de la soumission du formulaire
-									- A la fin du formulaire (après le submit) la collection se duplique (comme si le formulaire intégrait les champs non appelés ...)
-									- Le datepicker qui ne s'active plus onclick dans le champ "birthdate"
-					#}
-					{#  					
-					<div id="louvre_reservationbundle_reservation_tickets" data-prototype="{{ include('LouvreReservationBundle:Reservation:ticketForm.html.twig') | e }}">
-
+					 <div class="text-right">
+						<a href="#" id="addForm"><span class="glyphicon glyphicon-plus"></span> Ajouter une catégorie</a>
 					</div>
-					 #}
-
-					{# 2- La version "simpliste" du cours, qui se contente d'intégrer la ligne de la collection #}
-					{#	
-						Problèmes :	- Comme en #1, en POST, je ne trouve aucun formulaire submitted dans mon profiler ...
-									- Je ne peux enrober mes champs dans une div container ayant la class "form-group" pour consolider mon CSS via Bootstrap
-						
-						Cette fois-ci rien ne s'affiche à la fin du formulaire, comme attendu
-					 #}
-
-					{# {{ form_row(reservationForm.tickets) }} #}
 
 
-					{# 3- Ce à quoi le formulaire devrait ressembler à l'affichage (pour te faire une idée) #}
-					{# 
-					<div class="row">
-						{{ form_start(ticketForm, { 'attr': { 'class': 'ticketing-center form-horizontal' } }) }}
-
-							<div class="form-group">
-								{{ form_label(ticketForm.lastName, 'Nom :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
-								{{ form_errors(ticketForm.lastName) }}
-								<div class="col-md-10">
-									{{ form_widget(ticketForm.lastName, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre nom ...' } }) }}
-								</div>						
-							</div>
-							<div class="form-group">
-								{{ form_label(ticketForm.firstName, 'Prénom :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
-								{{ form_errors(ticketForm.firstName) }}
-								<div class="col-md-10">
-									{{ form_widget(ticketForm.firstName, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre prénom ...' } }) }}
-								</div>						
-							</div>
-							<div class="form-group">
-								{{ form_label(ticketForm.country, 'Pays :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
-								{{ form_errors(ticketForm.country) }}
-								<div class="col-md-10">
-									{{ form_widget(ticketForm.country, { 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre pays de résidence ...' } }) }}
-								</div>						
-							</div>
-							<div class="form-group">
-								{{ form_label(ticketForm.birthDate, 'Date de naissance :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
-								{{ form_errors(ticketForm.birthDate) }}
-								<div class="col-md-10">
-									<input type="text" id="datepickerTicket" class="form-control" placeholder="Sélectionnez votre date de naissance ..." readonly>
-									{{ form_widget(ticketForm.birthDate, { 'id': 'altDatepickerTicket', 'attr': { 'class': 'form-control', 'placeholder': 'Sélectionnez votre votre date de naissance ...' } }) }}
-								</div>						
-							</div>
-							<div class="form-group">
-								<div class="col-md-offset-2 col-md-10">
-									<div class="reduction-price-checkbox">
-										{{ form_widget(ticketForm.reducedPrice) }}
-										{{ form_label(ticketForm.reducedPrice, 'Bénéficiez-vous d\'un tarif réduit ? *') }}								
-									</div>
-								</div>
-							</div>
-
-						{{ form_end(ticketForm) }}
-
-						<div class="ticketing-submit-container">
-							<input type="submit" value="Confirmer ma commande">
-						</div>
-					</div><!-- ticket row -->
-					 #}
-
-					<a href="#" id="addForm"><span class="glyphicon glyphicon-plus"></span> Ajouter une catégorie</a>
-
-
-					{# BOUTON SUBMIT !!!!!!!!!!!!!!!!!!!!!! #}
+					{# Form submit #}
 					<div class="ticketing-submit-container">
 						{{ form_widget(reservationForm.confirm, { 'attr': { 'class': 'ticketing-submit' } }) }}
 					</div>
@@ -130,18 +59,9 @@
 				{{ form_end(reservationForm) }}
 			</div><!-- reservation row -->
 
-
-
-
-
-
-
 		</div><!-- container -->
 {% endblock %}
 
 {% block scripts %}
-	<script type="text/javascript" src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/datepickerBirthday.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/datepicker-fr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/multiform.js') }}"></script>
 {% endblock %}
