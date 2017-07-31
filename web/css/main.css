@@ -24,6 +24,11 @@ h1
 	margin-bottom: 20px;
 }
 
+h2
+{
+	margin-top: 60px;
+}
+
 .row-bordered
 {
 	border-bottom: solid 1px #222222;
@@ -139,6 +144,21 @@ h1
 	===================================================
 */
 
+
+span.glyphicon
+{
+	font-size: 1.3em;
+}
+
+.delete-ticket
+{
+	color: #e74c3c;
+}
+
+.delete-ticket:hover
+{
+	color: #c0392b;
+}
 
 .h2-container-center
 {

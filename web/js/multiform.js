@@ -28,9 +28,12 @@ $(document).ready(function(){
 	else
 	{
 		// If tickets already exist, a supression link is added for each of them
+		container.children('div').each(function() {
+			addDeleteLink($(this));
+		});
 	}
 
-	// Add a TicketType form
+	// Add a TicketType form function
 	function addTicket(container)
 	{
 		// Set in "data-prototype" content :
@@ -45,12 +48,31 @@ $(document).ready(function(){
 		var prototype = $(template);
 
 		// Add a delete link to delete ticket
+		addDeleteLink(prototype);
 
 		// Add prototype in the end of container div tag
 		container.append(prototype);
 
 		// Index is incremented
 		index++;
+	}
+
+	// Add a delete link in prototype function
+	function addDeleteLink(prototype)
+	{
+		// Link creation
+		var deleteLink = $('<div class="text-right"><a href="#" id="addForm" class="delete-ticket"><span class="glyphicon glyphicon-remove-sign"></span> Supprimer ce billet</a></div>');
+
+		// On click link event to delete Ticket
+		deleteLink.click(function(e) {
+			prototype.remove();
+
+			e.preventDefault(); // Avoid seeing '#' in url
+			return false;
+		});
+
+		// Link is added to prototype
+		prototype.prepend(deleteLink);
 	}
 
 });
