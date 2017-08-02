@@ -3,6 +3,7 @@
 namespace Louvre\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ticket
@@ -25,6 +26,9 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez indiquer votre prénom")
+     * @Assert\Type("alpha", message="Votre prénom doit être une chaîne de caractères sans chiffres")
+     * @Assert\Length(min = 3, minMessage="Votre prénom doit contenir au moins 3 lettres")
      */
     private $firstName;
 
@@ -32,6 +36,9 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez indiquer votre nom")
+     * @Assert\Type("alpha", message="Votre nom doit être une chaîne de caractères sans chiffres")
+     * @Assert\Length(min = 3, minMessage="Votre nom doit contenir au moins 3 lettres")
      */
     private $lastName;
 
@@ -39,6 +46,7 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez indiquer votre pays de résidence")
      */
     private $country;
 
@@ -46,11 +54,14 @@ class Ticket
      * @var \DateTime
      *
      * @ORM\Column(name="birthdate", type="datetimetz")
+     * @Assert\NotBlank(message="Vous devez indiquer votre date de naissance")
+     * @Assert\DateTime(message="Le format de la date est incorrect")
      */
     private $birthdate;
 
     /**
      * @ORM\Column(name="reduced_price", type="boolean")
+     * @Assert\Type("bool", message="La case cochée doit être soit vraie, soit fausse")
      */
     private $reducedPrice;
 

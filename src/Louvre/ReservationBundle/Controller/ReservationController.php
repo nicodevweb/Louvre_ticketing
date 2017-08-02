@@ -61,8 +61,7 @@ class ReservationController extends Controller
 		}
 
 		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig', array(
-			'reservationForm' => $reservationForm->createView(),
-			// 'ticketForm' => $ticketForm->createView()
+			'reservationForm' => $reservationForm->createView()
 		));
 	}
 }

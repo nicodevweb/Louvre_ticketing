@@ -4,6 +4,7 @@ namespace Louvre\ReservationBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Reservation
@@ -26,6 +27,7 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetimetz")
+     * @Assert\Date(message="Le format de la date est incorrect")
      */
     private $date;
 
@@ -40,11 +42,15 @@ class Reservation
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez indiquer une addresse e-mail")
+     * @Assert\Email(message="Le format de votre adresse e-mail n'est pas valide")
      */
     private $email;
 
     /**
      * @var array
+     *
+     * @Assert\Valid()
      */
     private $tickets;
 

@@ -155,7 +155,7 @@ span.glyphicon
 	color: #e74c3c;
 }
 
-.delete-ticket:hover
+.delete-ticket:hover, .delete-ticket:focus
 {
 	color: #c0392b;
 }

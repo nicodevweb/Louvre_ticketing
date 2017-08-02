@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
@@ -26,7 +28,11 @@ class ReservationType extends AbstractType
                 ->add('date',       HiddenType::class)
                 ->add('fullDay',    SubmitType::class, array('label' => 'Journée'))
                 ->add('halfDay',    SubmitType::class, array('label' => 'Demi-journée'))
-            ;           
+            ;
+
+            $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $event->stopPropagation();
+            }, 900);
         }
 
         // Form for ticket registration view
@@ -39,7 +45,8 @@ class ReservationType extends AbstractType
                     'entry_type' => TicketType::class,
                     'allow_add' => true,
                     'allow_delete' => true,
-                    'prototype' => true
+                    'prototype' => true,
+                    'label' => false
                 ))
                 ->add('confirm',    SubmitType::class, array('label' => 'Confirmer ma commande'))
             ;

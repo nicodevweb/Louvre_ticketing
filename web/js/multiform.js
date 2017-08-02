@@ -4,7 +4,7 @@
 	// 
 // ======================================================================
 
-$(document).ready(function(){
+$(document).ready(function () {
 
 	// We get div tag containing "data-prototype" attribute
 	var container = $('div#louvre_reservationbundle_reservation_tickets');
@@ -27,9 +27,15 @@ $(document).ready(function(){
 	}
 	else
 	{
+		// Define ticket's number in label when there is no index
+		var numTicket = 1;
+
 		// If tickets already exist, a supression link is added for each of them
 		container.children('div').each(function() {
 			addDeleteLink($(this));
+			// Set first label content (instead of collection row number)
+			this.getElementsByTagName('label')[0].innerHTML = 'Billet n°' + (numTicket);
+			numTicket++;
 		});
 	}
 

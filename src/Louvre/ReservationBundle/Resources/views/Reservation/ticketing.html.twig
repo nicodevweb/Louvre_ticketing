@@ -34,9 +34,9 @@
 					</div>
 					<div class="form-group">
 						{{ form_label(reservationForm.email, 'Adresse e-mail :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
-						{{ form_errors(reservationForm.email) }}
 						<div class="col-md-10">
 							{{ form_widget(reservationForm.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre adresse e-mail ...' } }) }}
+							<span class="has-error">{{ form_errors(reservationForm.email) }}</span>
 						</div>
 					</div>
 
@@ -45,7 +45,9 @@
 					</div>					
 
 					{# Reservation Ticket form collection #}
-					{{ form_widget(reservationForm.tickets) }}
+					<div id="container-tickets">
+						{{ form_widget(reservationForm.tickets) }}
+					</div>
 
 					{# Add ticket link #}
 					 <div class="text-right">
