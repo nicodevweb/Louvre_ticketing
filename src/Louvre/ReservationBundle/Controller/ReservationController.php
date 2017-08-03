@@ -51,13 +51,29 @@ class ReservationController extends Controller
 		// Ticketing view reservation form, based on Reservation object's session
 		$reservationForm = $this->createForm(ReservationType::class, $request->getSession()->get('reservation'), array('ticket' => true));
 
-		// // Ticketing view ticket form
-		// $ticketForm = $this->createForm(TicketType::class, $ticket);
-
 		if ($request->isMethod('POST') && $reservationForm->handleRequest($request)->isValid())
 		{
+			// Call PriceCalculator service
+			// $container is Controller's services container ($this->container->get('nom_du_bundle.nomduservice'))
+			$priceCalculator = $this->container->get('louvre_reservation.pricecalculator');
+			$reservationSession = $request->getSession()->get('reservation');
+			$reservationTickets = $request->getSession()->get('reservation')->getTickets();
+
+			// Calculate price for each Ticket in Reservation
+			foreach ($reservationTickets as $ticket)
+			{
+				// Use calculatePrice method from priceCalculator service
+				$price = $priceCalculator->calculatePrice($reservationSession->getType(), $ticket->getBirthdate(), $ticket->getReducedPrice());
+
+				// Set price to Ticket
+				$ticket->setPrice($price);
+			}
+
 			// Hydrate email in Reservation object
 			var_dump($request->getSession()->get('reservation'));
+			var_dump($request->getSession()->get('reservation')->getTickets());
+
+			// Redirection to price and confirmation view
 		}
 
 		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig', array(
