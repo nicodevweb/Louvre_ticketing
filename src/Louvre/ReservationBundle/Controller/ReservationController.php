@@ -54,7 +54,7 @@ class ReservationController extends Controller
 		if ($request->isMethod('POST') && $reservationForm->handleRequest($request)->isValid())
 		{
 			// Call PriceCalculator service
-			// $container is Controller's services container ($this->container->get('nom_du_bundle.nomduservice'))
+			// $this->get() is Controller's services container ($this->container->get('nom_du_bundle.nomduservice'))
 			$priceCalculator = $this->get('louvre_reservation.pricecalculator');
 			$reservationSession = $request->getSession()->get('reservation');
 			$reservationTickets = $request->getSession()->get('reservation')->getTickets();
