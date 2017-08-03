@@ -1,3 +1,8 @@
 services:
+    louvre_reservation.agecalculator:
+        class: Louvre\ReservationBundle\AgeCalculator\LouvreAgeCalculator
+
     louvre_reservation.pricecalculator:
         class: Louvre\ReservationBundle\PriceCalculator\LouvrePriceCalculator
+        arguments:
+            - "@louvre_reservation.agecalculator"

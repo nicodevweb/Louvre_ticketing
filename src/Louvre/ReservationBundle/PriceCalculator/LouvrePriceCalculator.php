@@ -2,14 +2,26 @@
 
 namespace Louvre\ReservationBundle\PriceCalculator;
 
+use Louvre\ReservationBundle\AgeCalculator\LouvreAgeCalculator;
+
 class LouvrePriceCalculator
 {
+	// AgeCalculator attribute
+	private $ageCalculator;
+
 	// Rate table
 	const	RATE_NORMAL = 16,
 			RATE_CHILD = 8,
 			RATE_BABY = 0,
 			RATE_SENIOR = 12,
 			RATE_REDUCED = 10;
+
+	// Contruct the calculator with AgeCalculator service
+
+	public function __construct(LouvreAgeCalculator $ageCalculator)
+	{
+		$this->ageCalculator = $ageCalculator;
+	}
 
 	/**
 	 * Calculate Ticket price according to :
@@ -27,11 +39,8 @@ class LouvrePriceCalculator
 			return $type == 'fullDay' ? $this::RATE_REDUCED : ($this::RATE_REDUCED/2);
 		}
 
-		// Calculate age
-		$dateNow = new \DateTime();
-		$difference = $dateNow->diff($birthdate);
-
-		$age = $difference->y;
+		// AgeCalculator service is called to calculate age
+		$age = $this->ageCalculator->calculateAge($birthdate);
 
 		// Return senior price if visitor is 60 years old and more
 		if ($age >= 60)
