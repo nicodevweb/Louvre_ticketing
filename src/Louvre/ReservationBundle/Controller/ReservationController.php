@@ -84,4 +84,9 @@ class ReservationController extends Controller
 
 		));
 	}
+
+	public function paymentAction()
+	{
+		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig');
+	}
 }

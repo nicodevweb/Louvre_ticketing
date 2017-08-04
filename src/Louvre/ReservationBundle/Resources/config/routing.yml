@@ -17,3 +17,8 @@ louvre_reservation_confirmation:
     path:     /confirmation
     defaults:
         _controller: LouvreReservationBundle:Reservation:confirmation
+
+louvre_reservation_payment:
+    path:     /payment
+    defaults:
+        _controller: LouvreReservationBundle:Reservation:payment
