@@ -22,3 +22,8 @@ louvre_reservation_payment:
     path:     /payment
     defaults:
         _controller: LouvreReservationBundle:Reservation:payment
+
+louvre_reservation_checkout:
+    path:     /checkout
+    defaults:
+        _controller: LouvreReservationBundle:Reservation:checkout

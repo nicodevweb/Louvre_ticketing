@@ -85,8 +85,53 @@ class ReservationController extends Controller
 		));
 	}
 
-	public function paymentAction()
+	public function paymentAction(Request $request)
 	{
-		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig');
+		// Get order total price
+		$reservationSession = $request->getSession()->get('reservation');
+		$reservationTickets = $request->getSession()->get('reservation')->getTickets();
+		$totalPrice = 0;
+
+		foreach ($reservationTickets as $ticket)
+		{
+			$totalPrice += $ticket->getprice();
+		}
+
+		// Convert total price in euros to cents
+		$totalPrice = $totalPrice * 100;
+		$_SESSION['totalPrice'] = $totalPrice;
+
+		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig', array(
+			'totalPrice' => $totalPrice
+		));
+	}
+
+	public function checkoutAction()
+	{
+		\Stripe\Stripe::setApiKey('sk_test_SJviYGmyjoe9FathSOqpy6tF');
+
+        // Get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // Create a charge: this will charge the user's card
+        try 
+        {
+            $charge = \Stripe\Charge::create(array(
+                'amount' => $_SESSION['totalPrice'], // Amount in cents
+                'currency' => 'eur',
+                'source' => $token,
+                'description' => 'Le musée du Louvre - Paiement'
+            ));
+
+            $this->addFlash('success', 'Merci pour votre achat !');
+
+            return $this->redirectToRoute('louvre_reservation_payment');
+        } 
+        catch(\Stripe\Error\Card $e)
+        {
+            $this->addFlash('error', 'Votre carte n\'a pas été acceptée.');
+
+            return $this->redirectToRoute('louvre_reservation_payment');
+        }
 	}
 }
