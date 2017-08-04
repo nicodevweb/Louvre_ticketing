@@ -45,7 +45,7 @@
 		                        <script
 		                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 		                                data-key="pk_test_cB07gWTou2UP0MhIJQnhN8jI"
-		                                data-amount="{{ totalPrice }}"
+		                                data-amount="{{ app.session.get('totalPrice') * 100 }}"
 		                                data-name="louvre-stripe"
 		                                data-description="Widget"
 		                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

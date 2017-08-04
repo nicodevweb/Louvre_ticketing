@@ -56,18 +56,19 @@ class ReservationController extends Controller
 			// Call PriceCalculator service
 			// $this->get() is Controller's services container ($this->container->get('nom_du_bundle.nomduservice'))
 			$priceCalculator = $this->get('louvre_reservation.pricecalculator');
-			$reservationSession = $request->getSession()->get('reservation');
-			$reservationTickets = $request->getSession()->get('reservation')->getTickets();
 
 			// Calculate price for each Ticket in Reservation
-			foreach ($reservationTickets as $ticket)
+			foreach ($request->getSession()->get('reservation')->getTickets() as $ticket)
 			{
 				// Use calculatePrice method from priceCalculator service
-				$price = $priceCalculator->calculatePrice($reservationSession->getType(), $ticket->getBirthdate(), $ticket->getReducedPrice());
+				$price = $priceCalculator->calculatePrice($request->getSession()->get('reservation')->getType(), $ticket->getBirthdate(), $ticket->getReducedPrice());
 
-				// Set price to Ticket
+				// Hydrate Ticket with its price
 				$ticket->setPrice($price);
 			}
+
+			// Calculate Reservation's total price with PriceCalculator service
+			$request->getSession()->set('totalPrice', $this->get('louvre_reservation.pricecalculator')->calculateTotal($request->getSession()->get('reservation')->getTickets()));
 
 			// Redirection to price and confirmation view
 			return $this->redirectToRoute('louvre_reservation_confirmation');
@@ -87,26 +88,10 @@ class ReservationController extends Controller
 
 	public function paymentAction(Request $request)
 	{
-		// Get order total price
-		$reservationSession = $request->getSession()->get('reservation');
-		$reservationTickets = $request->getSession()->get('reservation')->getTickets();
-		$totalPrice = 0;
-
-		foreach ($reservationTickets as $ticket)
-		{
-			$totalPrice += $ticket->getprice();
-		}
-
-		// Convert total price in euros to cents
-		$totalPrice = $totalPrice * 100;
-		$_SESSION['totalPrice'] = $totalPrice;
-
-		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig', array(
-			'totalPrice' => $totalPrice
-		));
+		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig');
 	}
 
-	public function checkoutAction()
+	public function checkoutAction(Request $request)
 	{
 		\Stripe\Stripe::setApiKey('sk_test_SJviYGmyjoe9FathSOqpy6tF');
 
@@ -117,7 +102,7 @@ class ReservationController extends Controller
         try 
         {
             $charge = \Stripe\Charge::create(array(
-                'amount' => $_SESSION['totalPrice'], // Amount in cents
+                'amount' => $request->getSession()->get('totalPrice') * 100, // Amount in cents
                 'currency' => 'eur',
                 'source' => $token,
                 'description' => 'Le musée du Louvre - Paiement'

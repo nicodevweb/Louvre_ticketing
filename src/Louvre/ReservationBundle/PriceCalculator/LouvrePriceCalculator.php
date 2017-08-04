@@ -3,6 +3,7 @@
 namespace Louvre\ReservationBundle\PriceCalculator;
 
 use Louvre\ReservationBundle\AgeCalculator\LouvreAgeCalculator;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LouvrePriceCalculator
 {
@@ -69,5 +70,20 @@ class LouvrePriceCalculator
 			// Return half of the price if ticket type attr = 'halfDay'
 			return $type =='fullDay' ? $this::RATE_BABY : ($this::RATE_BABY/2);
 		}
-	}	
+	}
+
+	// Calculate total price for a reservation
+	public function calculateTotal($tickets)
+	{
+		// Initialize reservation's total price to 0
+		$total = 0;
+
+		// Add each ticket value to total
+		foreach ($tickets as $ticket)
+		{
+			$total += $ticket->getPrice();
+		}
+
+		return $total;
+	}
 }
