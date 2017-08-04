@@ -69,15 +69,19 @@ class ReservationController extends Controller
 				$ticket->setPrice($price);
 			}
 
-			// Hydrate email in Reservation object
-			var_dump($request->getSession()->get('reservation'));
-			var_dump($request->getSession()->get('reservation')->getTickets());
-
 			// Redirection to price and confirmation view
+			return $this->redirectToRoute('louvre_reservation_confirmation');
 		}
 
 		return $this->render('LouvreReservationBundle:Reservation:ticketing.html.twig', array(
 			'reservationForm' => $reservationForm->createView()
+		));
+	}
+
+	public function confirmationAction(Request $request)
+	{
+		return $this->render('LouvreReservationBundle:Reservation:confirmation.html.twig', array(
+
 		));
 	}
 }

@@ -12,3 +12,8 @@ louvre_reservation_ticketing:
     path:     /ticketing
     defaults:
         _controller: LouvreReservationBundle:Reservation:ticketing
+
+louvre_reservation_confirmation:
+    path:     /confirmation
+    defaults:
+        _controller: LouvreReservationBundle:Reservation:confirmation

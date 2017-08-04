@@ -29,6 +29,12 @@ h2
 	margin-top: 60px;
 }
 
+.container-small
+{
+	margin: auto;
+	width : 80%;
+}
+
 .row-bordered
 {
 	border-bottom: solid 1px #222222;
@@ -36,10 +42,10 @@ h2
 	padding-bottom: 20px;
 }
 
-.container-small
+.no-padding
 {
-	margin: auto;
-	width : 80%;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
 
 
@@ -198,4 +204,51 @@ span.glyphicon
 {
 	background-color: #b99e00;
 	color: #ffffff;
+}
+
+
+/* 
+	Style definitions of application ticketing page elements
+	
+	===================================================
+*/
+
+
+.ticket-container
+{
+	background-color: #ecf0f1;
+	margin-bottom: 30px;
+	padding: 40px;
+}
+
+.confirm-link
+{
+	background-color: #c9ac00;
+	color : #ffffff;
+	font-size : 1.5em;
+	line-height: 80px;
+	text-decoration : none;
+}
+
+.confirm-link:hover, .confirm-link:focus
+{
+	background-color: #b99e00;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.confirm-link img
+{
+	margin-right : 20px;
+	width : 16%;
+}
+
+@media screen and (max-width : 768px)
+{
+	.confirm-link img
+	{
+		margin-right: 0;
+		padding: 10px 0 10px 0;
+		width : 35%;
+	}
 }
