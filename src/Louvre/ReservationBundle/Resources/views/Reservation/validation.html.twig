@@ -19,16 +19,22 @@
 						Pour tout problème concernant votre commande, n'hésitez pas à nous contacter sur cette page.
 					</p>
 				</div>
-			</div>
+			</div><!-- Infos row -->
 
 			<div class="row">
 				<div id="wrapper" class="validation-container">
 					<div class="text-center">
 						<h3>Accusé de réception de votre commande</h3>
 					</div>
-					<table class="details-container">
+					<table class="table details-container">
+						<thead>
+							<tr>
+								<th>Label</th>
+								<th>Information</th>
+							</tr>
+						</thead>
 						<tr>
-							<td>
+							<td class="table-label">
 								<strong>Date sélectionnée :</strong>
 							</td>
 							<td>
@@ -60,8 +66,12 @@
 						</tr>
 					</table>
 				</div>
+			</div><!-- Wrapper row -->
 
-			</div>
+			<a href="{{ path('louvre_reservation_home') }}" class="col-md-offset-3 col-md-6 text-center confirm-link">
+				<img src="{{ asset('images/homepage.png') }}" class="home-icon" title="Retourner à l'accueil" alt="Icône d'accueil">
+				Retourner à l'accueil
+			</a>
 
 		</div><!-- container -->
 {% endblock %}
