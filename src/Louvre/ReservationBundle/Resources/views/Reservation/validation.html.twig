@@ -1,0 +1,67 @@
+{% extends 'LouvreReservationBundle:Reservation:layout.html.twig' %}
+
+{% block title %}- Validation{% endblock %}
+
+{% block content %}
+		<div class="container">
+
+			<div class="row row-bordered">
+				<div class="container-small">
+					<h1 class="text-center">Validation de votre réservation</h1>
+				</div>
+			</div><!-- head row -->
+
+			<div class="row">
+				<div class="h2-container-center">
+					<p class="text-center">
+						Merci de soutenir le musée du Louvre en réservant vos billets d'entrée !<br>
+						Vous allez bientôt recevoir un e-mail à l'adresse que vous avez indiqué, contenant vos billets attitrés. Vous devrez les imprimer pour les présenter à l'accueil lors de votre visite.<br>
+						Pour tout problème concernant votre commande, n'hésitez pas à nous contacter sur cette page.
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="wrapper" class="validation-container">
+					<div class="text-center">
+						<h3>Accusé de réception de votre commande</h3>
+					</div>
+					<table class="details-container">
+						<tr>
+							<td>
+								<strong>Date sélectionnée :</strong>
+							</td>
+							<td>
+								Le {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Adresse e-mail :</strong>
+							</td>
+							<td>
+								{{ app.session.get('reservation').email }}
+							</td>
+						</tr>
+							<td>
+								<strong>Nombre de billets commandés :</strong>
+							</td>
+							<td>
+								A faire.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Prix total :</strong>
+							</td>
+							<td>
+								<strong>{{ app.session.get('totalPrice') }}€</strong>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+		</div><!-- container -->
+{% endblock %}

@@ -30,6 +30,7 @@ class ReservationType extends AbstractType
                 ->add('halfDay',    SubmitType::class, array('label' => 'Demi-journée'))
             ;
 
+            // Stop form to use annotations (in order to let NotBlank constraint on Reservation's email attribute)
             $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $event->stopPropagation();
             }, 900);

@@ -53,7 +53,7 @@ class Ticket
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthdate", type="datetimetz")
+     * @ORM\Column(name="birthdate", type="datetime")
      * @Assert\NotBlank(message="Vous devez indiquer votre date de naissance")
      * @Assert\DateTime(message="Le format de la date est incorrect")
      */
@@ -75,10 +75,10 @@ class Ticket
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Reservation")
-     * @ORM\Column(name="reservation_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Reservation", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $reservationId;
+    private $reservation;
 
 
     /**
@@ -212,30 +212,6 @@ class Ticket
     }
 
     /**
-     * Set reservationId
-     *
-     * @param \stdClass $reservation
-     *
-     * @return Ticket
-     */
-    public function setReservationId($reservationId)
-    {
-        $this->reservationId = $reservationId;
-
-        return $this;
-    }
-
-    /**
-     * Get reservationId
-     *
-     * @return \stdClass
-     */
-    public function getReservationId()
-    {
-        return $this->reservationId;
-    }
-
-    /**
      * Set reducedPrice
      *
      * @param boolean $reducedPrice
@@ -257,5 +233,29 @@ class Ticket
     public function getReducedPrice()
     {
         return $this->reducedPrice;
+    }
+
+    /**
+     * Set reservation
+     *
+     * @param \Louvre\ReservationBundle\Entity\Reservation $reservation
+     *
+     * @return Ticket
+     */
+    public function setReservation(\Louvre\ReservationBundle\Entity\Reservation $reservation)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Louvre\ReservationBundle\Entity\Reservation
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
     }
 }

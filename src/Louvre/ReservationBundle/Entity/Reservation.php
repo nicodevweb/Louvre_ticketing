@@ -26,7 +26,7 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetimetz")
+     * @ORM\Column(name="date", type="string")
      * @Assert\Date(message="Le format de la date est incorrect")
      */
     private $date;

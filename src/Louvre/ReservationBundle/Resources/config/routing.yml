@@ -27,3 +27,8 @@ louvre_reservation_checkout:
     path:     /checkout
     defaults:
         _controller: LouvreReservationBundle:Reservation:checkout
+
+louvre_reservation_validation:
+    path:     /validation
+    defaults:
+        _controller: LouvreReservationBundle:Reservation:validation

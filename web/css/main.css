@@ -285,3 +285,20 @@ code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break
     @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
     .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
 }
+
+.validation-container
+{
+	padding: 20px 30px 30px 30px;
+}
+
+table
+{
+	margin: auto;
+	margin-top: 40px;
+	width: 70%;
+}
+
+table td
+{
+	padding : 10px 0 10px 40px;
+}

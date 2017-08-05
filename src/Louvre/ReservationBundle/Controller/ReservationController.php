@@ -81,9 +81,7 @@ class ReservationController extends Controller
 
 	public function confirmationAction(Request $request)
 	{
-		return $this->render('LouvreReservationBundle:Reservation:confirmation.html.twig', array(
-
-		));
+		return $this->render('LouvreReservationBundle:Reservation:confirmation.html.twig');
 	}
 
 	public function paymentAction(Request $request)
@@ -108,9 +106,26 @@ class ReservationController extends Controller
                 'description' => 'Le musée du Louvre - Paiement'
             ));
 
+            // Get EntitiManager
+            $em = $this->getDoctrine()->getManager();
+
+            // Reservation is persisted in EntityManager
+            $em->persist($request->getSession()->get('reservation'));
+
+            // Each Reservation's Ticket is persisted in EntityManager
+            foreach ($request->getSession()->get('reservation')->getTickets() as $ticket)
+            {
+            	// Set Reservation in Ticket's attribute
+            	$ticket->setReservation($request->getSession()->get('reservation'));
+
+            	$em->persist($ticket);
+            }
+
+            $em->flush();
+
             $this->addFlash('success', 'Merci pour votre achat !');
 
-            return $this->redirectToRoute('louvre_reservation_payment');
+            return $this->redirectToRoute('louvre_reservation_validation');
         } 
         catch(\Stripe\Error\Card $e)
         {
@@ -118,5 +133,18 @@ class ReservationController extends Controller
 
             return $this->redirectToRoute('louvre_reservation_payment');
         }
+	}
+
+	public function validationAction(Request $request)
+	{
+		// Render a validation message
+
+		// Render transaction's total cost
+
+		// Send email with tickets in it
+
+		// Détruit la session
+
+		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig');
 	}
 }
