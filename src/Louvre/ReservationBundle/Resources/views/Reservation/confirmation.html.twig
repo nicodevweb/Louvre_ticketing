@@ -34,17 +34,19 @@
 				</div>
 				{% set index = 1 %}
 				{% for ticket in app.session.get('reservation').tickets %}
-					<div class="ticket-container col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-{{ (index is odd) ? 1 : 2 }}">
-						<div class="h2-container-center">
-							<h4>Billet n°{{ index }}</h4>
+					<div class="col-sm-6 col-md-4">
+						<div class="ticket-container col-sm-offset-1 col-sm-10">
+							<div class="h2-container-center">
+								<h4>Billet n°{{ index }}</h4>
+							</div>
+							<p><label>Nom :</label> {{ ticket.lastName }}</p>
+							<p><label>Prénom :</label> {{ ticket.firstName }}</p>
+							<p><label>Pays :</label> {{ ticket.country }}</p>
+							<p><label>Date de naissance :</label> {{ ticket.birthdate | date('d/m/Y', 'Europe/Paris') }}</p>
+							<p><label>Tarif réduit :</label> {{ (ticket.reducedPrice) ? 'Oui' : 'Non' }}</p>
+							<p><label>Prix du billet :</label> {{ (ticket.price == 0) ? 'Gratuit' : ticket.price ~ '€' }}</p>
+							{% set index = index + 1 %}
 						</div>
-						<p><label>Nom :</label> {{ ticket.lastName }}</p>
-						<p><label>Prénom :</label> {{ ticket.firstName }}</p>
-						<p><label>Pays :</label> {{ ticket.country }}</p>
-						<p><label>Date de naissance :</label> {{ ticket.birthdate | date('d/m/Y', 'Europe/Paris') }}</p>
-						<p><label>Tarif réduit :</label> {{ (ticket.reducedPrice) ? 'Oui' : 'Non' }}</p>
-						<p><label>Prix du billet :</label> {{ (ticket.price == 0) ? 'Gratuit' : ticket.price ~ '€' }}</p>
-						{% set index = index + 1 %}
 					</div>
 				{% endfor %}
 				<div class="col-xs-12 text-center total-price">
