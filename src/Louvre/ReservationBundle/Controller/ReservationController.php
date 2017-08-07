@@ -137,14 +137,15 @@ class ReservationController extends Controller
 
 	public function validationAction(Request $request)
 	{
-		// Render a validation message
-
-		// Render transaction's total cost
+		// Count number of tickets in Reservation
+		$nbTickets = $this->get('louvre_reservation.ticketcounter')->countReservationTickets($request->getSession()->get('reservation')->getTickets());
 
 		// Send email with tickets in it
 
 		// Détruit la session
 
-		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig');
+		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig', array(
+			'nbTickets' => $nbTickets
+		));
 	}
 }
