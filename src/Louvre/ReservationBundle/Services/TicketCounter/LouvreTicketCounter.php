@@ -1,6 +1,6 @@
 <?php
 
-namespace Louvre\ReservationBundle\TicketCounter;
+namespace Louvre\ReservationBundle\Services\TicketCounter;
 
 class LouvreTicketCounter
 {

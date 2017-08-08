@@ -1,6 +1,6 @@
 <?php
 
-namespace Louvre\ReservationBundle\AgeCalculator;
+namespace Louvre\ReservationBundle\Services\AgeCalculator;
 
 class LouvreAgeCalculator
 {

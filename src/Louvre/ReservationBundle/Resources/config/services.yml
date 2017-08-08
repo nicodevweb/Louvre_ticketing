@@ -1,14 +1,14 @@
 services:
     louvre_reservation.agecalculator:
-        class: Louvre\ReservationBundle\AgeCalculator\LouvreAgeCalculator
+        class: Louvre\ReservationBundle\Services\AgeCalculator\LouvreAgeCalculator
 
     louvre_reservation.pricecalculator:
-        class: Louvre\ReservationBundle\PriceCalculator\LouvrePriceCalculator
+        class: Louvre\ReservationBundle\Services\PriceCalculator\LouvrePriceCalculator
         arguments:
             - "@louvre_reservation.agecalculator"
 
     louvre_reservation.ticketcounter:
-        class: Louvre\ReservationBundle\TicketCounter\LouvreTicketCounter
+        class: Louvre\ReservationBundle\Services\TicketCounter\LouvreTicketCounter
 
     louvre_reservation.codegenerator:
         class: Louvre\ReservationBundle\Services\CodeGenerator\LouvreCodeGenerator

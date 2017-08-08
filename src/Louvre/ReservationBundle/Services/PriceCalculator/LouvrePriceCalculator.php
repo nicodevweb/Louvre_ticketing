@@ -1,8 +1,8 @@
 <?php
 
-namespace Louvre\ReservationBundle\PriceCalculator;
+namespace Louvre\ReservationBundle\Services\PriceCalculator;
 
-use Louvre\ReservationBundle\AgeCalculator\LouvreAgeCalculator;
+use Louvre\ReservationBundle\Services\AgeCalculator\LouvreAgeCalculator;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class LouvrePriceCalculator
