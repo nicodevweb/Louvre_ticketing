@@ -18,8 +18,11 @@ class ReservationController extends Controller
 
 	public function calendarAction(Request $request)
 	{
-		// Reservation object is created
-		$reservation = new Reservation();
+		// New reservation code is created
+		$code = $this->get('louvre_reservation.codegenerator')->generateRandomCode();
+
+		// Reservation object is constructed with its code
+		$reservation = new Reservation($code);
 
 		// FormBuilder is created by form factory service
 		$form = $this->createForm(ReservationType::class, $reservation, array('calendar' => true));

@@ -2,6 +2,7 @@
 
 namespace Louvre\ReservationBundle\Entity;
 
+use Louvre\ReservationBundle\Services\CodeGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -48,17 +49,24 @@ class Reservation
     private $email;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=255)
+     */
+    private $code;
+
+    /**
      * @var array
      *
      * @Assert\Valid()
      */
     private $tickets;
 
-    public function __construct()
+    public function __construct($code)
     {
         $this->tickets = new ArrayCollection();
+        $this->code = $code;
     }
-
 
     /**
      * Get id
@@ -150,5 +158,29 @@ class Reservation
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Reservation
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

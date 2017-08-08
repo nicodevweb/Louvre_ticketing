@@ -21,6 +21,7 @@
 					<h2>Informations principales de votre réservation</h2>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1 no-padding">
+					<p><label>N° de Commande :</label> {{ app.session.get('reservation').code }}</p>
 					<p>
 						<label>Date sélectionnée :</label> {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}
 					</p>

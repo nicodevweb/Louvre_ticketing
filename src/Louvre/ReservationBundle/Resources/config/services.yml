@@ -9,3 +9,6 @@ services:
 
     louvre_reservation.ticketcounter:
         class: Louvre\ReservationBundle\TicketCounter\LouvreTicketCounter
+
+    louvre_reservation.codegenerator:
+        class: Louvre\ReservationBundle\Services\CodeGenerator\LouvreCodeGenerator
