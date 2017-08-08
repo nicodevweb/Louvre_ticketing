@@ -106,7 +106,7 @@ class ReservationController extends Controller
                 'description' => 'Le musée du Louvre - Paiement'
             ));
 
-            // Get EntitiManager
+            // Get EntityManager
             $em = $this->getDoctrine()->getManager();
 
             // Reservation is persisted in EntityManager
@@ -140,7 +140,32 @@ class ReservationController extends Controller
 		// Count number of tickets in Reservation
 		$nbTickets = $this->get('louvre_reservation.ticketcounter')->countReservationTickets($request->getSession()->get('reservation')->getTickets());
 
+		// Get Reservation's tickets to send them in email
+		$tickets = $request->getSession()->get('reservation')->getTickets();
+
 		// Send email with tickets in it
+		$mailer = $this->get('swiftmailer.mailer.default');
+
+		$message = (new \Swift_Message('Votre réservation de billets au Musée du Louvre'))
+			->setFrom('no-reply-museedulouvre@gmail.com')
+			->setTo($request->getSession()->get('reservation')->getEmail())
+		;
+
+		$data['logo'] = $message->embed(\Swift_Image::fromPath('http://localhost/Louvre_ticketing/web/images/louvre_logo.jpg'));
+			
+		$message->setBody(
+				$this->renderView(
+					'LouvreReservationBundle:Emails:validation.html.twig',
+					array(
+						'tickets' => $tickets,
+						'data' => $data
+					)
+				),
+				'text/html'
+			)
+		;
+
+		$mailer->send($message);
 
 		// Détruit la session
 

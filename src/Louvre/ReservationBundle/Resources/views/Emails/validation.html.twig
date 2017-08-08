@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body style="text-align : justify">
+		<header style="border-bottom : 1px solid #000000; margin : auto; width : 90%">
+			<img src="{{ data.logo }}" style="width: 20%">
+			<div style="text-align : center">
+				<h2> Le Musée du Louvre</h2>
+				<h1>Confirmation de votre commande</h1>
+			</div>
+		</header>
+		<section style="background-color : #ecf0f1; margin : auto;  width : 90%">
+			<p style="padding : 30px; margin : 0">
+				Merci de soutenir notre musée en réservant en ligne vos billets!<br>
+				Cet e-mail fait office de billet d'entrée. Veuillez l'imprimer et l'emmener avec vous pour le présenter à l'accueil lors de votre visite. N'oubliez pas : les personnes ayant coché la case "tarif réduit" doivent impérativement présenter leur justificatif à l'entrée, sous peine de devoir payer un tarif classique.
+			</p>
+			<p style="background-color : #FFFFFF; margin : auto; margin-bottom : 30px; padding : 30px; text-align : center; width : 90%">
+				<strong>
+					Date de votre réservation :
+				</strong>
+				 {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}
+			</p>
+			<h3 style="margin : auto; width : 90%">Liste de vos billets :</h3>
+			<div style="padding : 30px">
+				{% for ticket in tickets %}
+					<div style="background-color : #FFFFFF; display : flex; margin : auto; margin-bottom : 20px; padding : 30px; width : 90%">
+						<div style="width : 60%">
+							<p><strong>Nom :</strong> {{ ticket.lastName }}</p>
+							<p><strong>Prénom :</strong> {{ ticket.firstName }}</p>
+							<p><strong>Date de naissance :</strong> {{ ticket.birthdate | date('d/m/Y', 'Europe/Paris') }}</p>
+						</div>
+						<div style="border-left : 1px solid #000000; font-size : 1.7em; line-height : 55px; text-align : center; width : 40%">
+							<p><strong>Prix :</strong> {{ (ticket.price == 0) ? 'Gratuit' : ticket.price ~ '€' }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+		<footer style="border-top : 1px solid #000000; margin : auto; padding-top : 20px; text-align : center; width : 90%">
+			Projet créé par Nicolas GINDRE dans le cadre d'une formation <a href="http://www.openclassrooms.com">Openclassrooms</a> - 2017
+		</footer>
+	</body>
+</html>
