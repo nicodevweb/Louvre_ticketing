@@ -80,7 +80,7 @@ h2
 
 
 /* 
-	Style definitions of application index elements
+	Style definitions of application calendar elements
 	
 	===================================================
 */
@@ -107,12 +107,12 @@ h2
 	background-color: #c9ac00;
 	border: none;
 	border-radius: 0;
-	color: #ffffff;
+	color: transparent;
 	display: inline-block;
-	font-size: 2em;
+	font-size: 0em;
 	margin-right: -4px;
-	padding: 20px 0 20px 30px;
-	width: 25%;	
+	padding: 40px 0 40px 0px;
+	width: 45%;
 }
 
 .datepicker-submit:hover, .datepicker-submit:focus
@@ -129,16 +129,16 @@ h2
 .full-day
 {
 	background-image: url('../images/chronometer.png');
-	background-size: 15%;
-	background-position: 24% 50%;
+	background-size: 20%;
+	background-position: 50%;
 	background-repeat: no-repeat;
 }
 
 .half-day
 {
 	background-image: url('../images/half-an-hour.png');
-	background-size: 15%;
-	background-position: 10% 50%;
+	background-size: 20%;
+	background-position: 50%;
 	background-repeat: no-repeat;
 }
 
@@ -147,6 +147,50 @@ h2
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
+}
+
+@media screen and (min-width: 768px)
+{
+	.datepicker-submit
+	{
+		color: #ffffff;
+		font-size: 2em;
+		margin-right: -4px;
+		padding: 20px 0 20px 30px;
+		width: 39%;	
+	}
+
+	.full-day
+	{
+		background-image: url('../images/chronometer.png');
+		background-size: 15%;
+		background-position: 24% 50%;
+		background-repeat: no-repeat;
+	}
+
+	.half-day
+	{
+		background-image: url('../images/half-an-hour.png');
+		background-size: 15%;
+		background-position: 10% 50%;
+		background-repeat: no-repeat;
+	}
+}
+
+@media screen and (min-width:  992px)
+{
+	.datepicker-submit
+	{
+		width: 30%;	
+	}
+}
+
+@media screen and (min-width: 1200px)
+{
+	.datepicker-submit
+	{
+		width: 25%;	
+	}
 }
 
 
@@ -195,21 +239,45 @@ span.glyphicon
 {
 	background-color: #c9ac00;
 	background-image: url('../images/shopping-basket.png');
-	background-size: 12%;
-	background-position: 8% 50%;
+	background-size: 15%;
+	background-position: 50%;
 	background-repeat: no-repeat;
 	border: none;
 	border-radius: 0;
-	color: #ffffff;
-	font-size: 1.7em;
+	color: transparent;
+	font-size: 0em;
 	margin-right: -4px;
-	padding: 20px 20px 20px 80px;
+	padding: 60px 0 60px 0;
+	width: 100%;
 }
 
 .ticketing-submit:hover, .ticketing-submit:focus
 {
 	background-color: #b99e00;
 	color: #ffffff;
+}
+
+@media screen and (min-width: 768px)
+{
+	.ticketing-submit
+	{
+		background-size: 12%;
+		background-position: 8% 50%;
+		color: #ffffff;
+		font-size: 1.2em;
+		margin-right: -4px;
+		padding: 20px 0 20px 30px;
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: 992px)
+{
+	.ticketing-submit
+	{
+		font-size: 1.7em;
+		padding: 20px 20px 20px 80px;
+	}
 }
 
 
@@ -302,6 +370,11 @@ code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break
 	
 	===================================================
 */
+
+.validation-intro-container
+{
+	word-break: break-all;
+}
 
 table
 {

@@ -24,20 +24,18 @@
 				{# Bootstrap form theme declaration for reservationForm #}
 				{% form_theme reservationForm 'LouvreReservationBundle:Form:bootstrap_theme.html.twig' %}
 
-				{{ form_start(reservationForm,{ 'attr': { 'class': 'ticketing-center form-horizontal' } }) }}
+				{{ form_start(reservationForm,{ 'attr': { 'class': 'ticketing-center' } }) }}
 
 					<div class="form-group">
-						<label class="control-label col-md-2">Date sélectionnée :</label>
-						<div class="col-md-10">
-							<span class="form-control">Le {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}</span>
-						</div>
+						<label class="control-label">Date sélectionnée :</label>
+						<p class="form-control">
+							Le {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}, {{ (app.session.get('reservation').type == 'fullDay') ? 'tarif journée' : 'tarif demi-journée' }}
+						</p>
 					</div>
 					<div class="form-group">
-						{{ form_label(reservationForm.email, 'Adresse e-mail :', { 'label_attr': { 'class': 'control-label col-md-2' } }) }}
-						<div class="col-md-10">
-							{{ form_widget(reservationForm.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre adresse e-mail ...' } }) }}
-							<span class="has-error">{{ form_errors(reservationForm.email) }}</span>
-						</div>
+						{{ form_label(reservationForm.email, 'Adresse e-mail :', { 'label_attr': { 'class': 'control-label' } }) }}
+						{{ form_widget(reservationForm.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre adresse e-mail ...' } }) }}
+						<span class="has-error">{{ form_errors(reservationForm.email) }}</span>
 					</div>
 
 					<div class="h2-container-center">
