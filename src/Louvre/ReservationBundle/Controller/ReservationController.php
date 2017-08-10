@@ -76,7 +76,9 @@ class ReservationController extends Controller
 			$request->getSession()->get('reservation')->setNbTickets($nbTickets);
 
 			// Calculate Reservation's total price with PriceCalculator service
-			$request->getSession()->set('totalPrice', $this->get('louvre_reservation.pricecalculator')->calculateTotal($request->getSession()->get('reservation')->getTickets()));
+			$totalPrice = $this->get('louvre_reservation.pricecalculator')->calculateTotal($request->getSession()->get('reservation')->getTickets());
+			$request->getSession()->get('reservation')->setTotalPrice($totalPrice);
+			$request->getSession()->set('totalPrice', $totalPrice);
 
 			// Redirection to price and confirmation view
 			return $this->redirectToRoute('louvre_reservation_confirmation');
@@ -145,10 +147,9 @@ class ReservationController extends Controller
 
 	public function validationAction(Request $request)
 	{
-		
-
-		// Get Reservation's tickets to send them in email
-		$tickets = $request->getSession()->get('reservation')->getTickets();
+		// Get reservation's info to prepare email and session reset before rendering
+		$reservation = $request->getSession()->get('reservation');
+		$tickets = $reservation->getTickets();
 
 		// Send email with tickets in it
 		$mailer = $this->get('swiftmailer.mailer.default');
@@ -174,11 +175,20 @@ class ReservationController extends Controller
 
 		$mailer->send($message);
 
-		// Détruit la session
+		// Reset the session data
+		$request->getSession()->invalidate();
 
-		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig');
+		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig', array(
+			'reservation' => $reservation
+		));
 	}
 
+	/**
+	 * API used in calendarAction
+	 *
+	 * Use AJAX POST data
+	 * Return JsonResponse to give information about a date's number of tickets sold
+	 */
 	public function getNbTicketsAction(Request $request)
 	{
 		// Get date chosen in calendar

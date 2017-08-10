@@ -25,7 +25,7 @@
 				<div id="wrapper" class="validation-container">
 					<div class="text-center">
 						<h3>Accusé de réception de votre commande</h3>
-						<h4>N° {{ app.session.get('reservation').code }}</h4>
+						<h4>N° {{ reservation.code }}</h4>
 					</div>
 					<table class="table details-container">
 						<thead>
@@ -39,7 +39,7 @@
 								<strong>Date sélectionnée :</strong>
 							</td>
 							<td>
-								Le {{ app.session.get('reservation').date | date('d/m/Y', 'Europe/Paris') }}
+								Le {{ reservation.date | date('d/m/Y', 'Europe/Paris') }}
 							</td>
 						</tr>
 						<tr>
@@ -47,14 +47,14 @@
 								<strong>Adresse e-mail :</strong>
 							</td>
 							<td>
-								{{ app.session.get('reservation').email }}
+								{{ reservation.email }}
 							</td>
 						</tr>
 							<td>
 								<strong>Nombre de billets commandés :</strong>
 							</td>
 							<td>
-								{{ app.session.get('reservation').nbTickets }}
+								{{ reservation.nbTickets }}
 							</td>
 						</tr>
 						<tr>
@@ -62,7 +62,7 @@
 								<strong>Prix total :</strong>
 							</td>
 							<td>
-								<strong>{{ app.session.get('totalPrice') }}€</strong>
+								<strong>{{ reservation.totalPrice }}€</strong>
 							</td>
 						</tr>
 					</table>

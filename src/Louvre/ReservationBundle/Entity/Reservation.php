@@ -69,6 +69,11 @@ class Reservation
      */
     private $nbTickets;
 
+    /**
+     * @var int
+     */
+    private $totalPrice;
+
     public function __construct($code)
     {
         $this->tickets = new ArrayCollection();
@@ -213,5 +218,29 @@ class Reservation
     public function getNbTickets()
     {
         return $this->nbTickets;
+    }
+
+    /**
+     * Set totalPrice
+     *
+     * @param integer $totalPrice
+     *
+     * @return Reservation
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get totalPrice
+     *
+     * @return integer
+     */
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
     }
 }
