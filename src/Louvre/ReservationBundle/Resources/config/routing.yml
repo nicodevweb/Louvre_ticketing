@@ -32,3 +32,8 @@ louvre_reservation_validation:
     path:     /validation
     defaults:
         _controller: LouvreReservationBundle:Reservation:validation
+
+louvre_reservation_get_ticket_number:
+    path:     /api-calendar
+    defaults:
+        _controller: LouvreReservationBundle:Reservation:getNbTickets

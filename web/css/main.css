@@ -96,6 +96,12 @@ h2
 	display: inline-block;
 }
 
+.datepicker-info
+{
+	color: #e74c3c;
+	font-size: 1.3em;
+}
+
 .datepicker-submit
 {
 	background-color: #c9ac00;

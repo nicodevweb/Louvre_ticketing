@@ -7,6 +7,7 @@ use Louvre\ReservationBundle\Entity\Ticket;
 use Louvre\ReservationBundle\Form\ReservationType;
 use Louvre\ReservationBundle\Form\TicketType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller
@@ -69,6 +70,10 @@ class ReservationController extends Controller
 				// Hydrate Ticket with its price
 				$ticket->setPrice($price);
 			}
+
+			// Count number of tickets in Reservation and set it in Reservation's session
+			$nbTickets = $this->get('louvre_reservation.ticketcounter')->countReservationTickets($request->getSession()->get('reservation')->getTickets());
+			$request->getSession()->get('reservation')->setNbTickets($nbTickets);
 
 			// Calculate Reservation's total price with PriceCalculator service
 			$request->getSession()->set('totalPrice', $this->get('louvre_reservation.pricecalculator')->calculateTotal($request->getSession()->get('reservation')->getTickets()));
@@ -140,8 +145,7 @@ class ReservationController extends Controller
 
 	public function validationAction(Request $request)
 	{
-		// Count number of tickets in Reservation
-		$nbTickets = $this->get('louvre_reservation.ticketcounter')->countReservationTickets($request->getSession()->get('reservation')->getTickets());
+		
 
 		// Get Reservation's tickets to send them in email
 		$tickets = $request->getSession()->get('reservation')->getTickets();
@@ -172,8 +176,24 @@ class ReservationController extends Controller
 
 		// Détruit la session
 
-		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig', array(
-			'nbTickets' => $nbTickets
-		));
+		return $this->render('LouvreReservationBundle:Reservation:validation.html.twig');
+	}
+
+	public function getNbTicketsAction(Request $request)
+	{
+		// Get date chosen in calendar
+		$chosenDate = $request->get('chosenDate');
+
+		// Use magic method to get reservations at a precise date
+		$reservationsList = $this->getDoctrine()->getManager()->getRepository('LouvreReservationBundle:Reservation')->findByDate($chosenDate);
+		$nbTickets = 0;
+
+		foreach ($reservationsList as $reservation)
+		{
+			$nbTickets += $reservation->getNbTickets();
+		}
+
+		// // Ask database if day is sold out
+		return ($nbTickets >= 1000) ? new JsonResponse(array('result' => 'sold_out')) : new JsonResponse(array('result' => 'not_sold_out'));
 	}
 }

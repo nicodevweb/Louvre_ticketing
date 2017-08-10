@@ -62,6 +62,13 @@ class Reservation
      */
     private $tickets;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_tickets", type="integer")
+     */
+    private $nbTickets;
+
     public function __construct($code)
     {
         $this->tickets = new ArrayCollection();
@@ -182,5 +189,29 @@ class Reservation
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * Set nbTickets
+     *
+     * @param integer $nbTickets
+     *
+     * @return Reservation
+     */
+    public function setNbTickets($nbTickets)
+    {
+        $this->nbTickets = $nbTickets;
+
+        return $this;
+    }
+
+    /**
+     * Get nbTickets
+     *
+     * @return integer
+     */
+    public function getNbTickets()
+    {
+        return $this->nbTickets;
     }
 }

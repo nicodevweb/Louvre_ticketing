@@ -54,7 +54,7 @@
 								<strong>Nombre de billets commandés :</strong>
 							</td>
 							<td>
-								{{ nbTickets }}
+								{{ app.session.get('reservation').nbTickets }}
 							</td>
 						</tr>
 						<tr>

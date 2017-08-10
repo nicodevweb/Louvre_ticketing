@@ -26,7 +26,10 @@
 						{{ form_errors(form.date) }}
 					</div>
 					{{ form_widget(form.fullDay, { 'id': 'fullDay', 'attr': { 'class': 'datepicker-submit full-day', 'disabled': 'disabled' } }) }}
-					{{ form_widget(form.halfDay, { 'attr': { 'class': 'datepicker-submit half-day' } }) }}
+					{{ form_widget(form.halfDay, { 'id': 'halfDay', 'attr': { 'class': 'datepicker-submit half-day' } }) }}
+					<br>
+					<br>
+					<span class="datepicker-info" id="datepickerMsgInfo"></span>
 
 				{{ form_end(form) }}
 			</div><!-- form row -->
@@ -35,6 +38,9 @@
 {% endblock %}
 
 {% block scripts %}
+	<script type="text/javascript">
+		var ticketsNumberRoute = "{{ path('louvre_reservation_get_ticket_number') }}";
+	</script>
 	<script type="text/javascript" src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/datepickerReservation.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/datepicker-fr.js') }}"></script>
