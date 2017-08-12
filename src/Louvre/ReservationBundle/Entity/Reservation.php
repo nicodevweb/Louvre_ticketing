@@ -173,6 +173,16 @@ class Reservation
     }
 
     /**
+     * Set tickets
+     *
+     * @return array
+     */
+    public function setTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
      * Set code
      *
      * @param string $code
