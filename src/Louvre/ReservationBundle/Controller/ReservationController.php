@@ -52,6 +52,11 @@ class ReservationController extends Controller
 
 	public function ticketingAction(Request $request)
 	{
+		if ($request->getSession()->get('reservation') == NULL)
+		{
+			throw new \Exception();
+		}
+		
 		// Ticketing view reservation form, based on Reservation object's session
 		$reservationForm = $this->createForm(ReservationType::class, $request->getSession()->get('reservation'), array('ticket' => true));
 
@@ -91,16 +96,31 @@ class ReservationController extends Controller
 
 	public function confirmationAction(Request $request)
 	{
+		if ($request->getSession()->get('reservation') == NULL)
+		{
+			throw new \Exception();
+		}
+
 		return $this->render('LouvreReservationBundle:Reservation:confirmation.html.twig');
 	}
 
 	public function paymentAction(Request $request)
 	{
+		if ($request->getSession()->get('reservation') == NULL)
+		{
+			throw new \Exception();
+		}
+
 		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig');
 	}
 
 	public function checkoutAction(Request $request)
 	{
+		if ($request->getSession()->get('reservation') == NULL)
+		{
+			throw new \Exception();
+		}
+
 		\Stripe\Stripe::setApiKey('sk_test_SJviYGmyjoe9FathSOqpy6tF');
 
         // Get the credit card details submitted by the form
@@ -147,6 +167,11 @@ class ReservationController extends Controller
 
 	public function validationAction(Request $request)
 	{
+		if ($request->getSession()->get('reservation') == NULL)
+		{
+			throw new \Exception();
+		}
+
 		// Get reservation's info to prepare email and session reset before rendering
 		$reservation = $request->getSession()->get('reservation');
 		$tickets = $reservation->getTickets();
