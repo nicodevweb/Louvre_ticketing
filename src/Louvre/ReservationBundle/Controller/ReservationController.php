@@ -109,7 +109,7 @@ class ReservationController extends Controller
         // Create a charge: this will charge the user's card
         try 
         {
-            $charge = \Stripe\Charge::create(array(
+            \Stripe\Charge::create(array(
                 'amount' => $request->getSession()->get('totalPrice') * 100, // Amount in cents
                 'currency' => 'eur',
                 'source' => $token,
