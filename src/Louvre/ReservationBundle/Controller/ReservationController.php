@@ -104,7 +104,7 @@ class ReservationController extends Controller
 		\Stripe\Stripe::setApiKey('sk_test_SJviYGmyjoe9FathSOqpy6tF');
 
         // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
+        $token = $request->request->get('stripeToken');
 
         // Create a charge: this will charge the user's card
         try 

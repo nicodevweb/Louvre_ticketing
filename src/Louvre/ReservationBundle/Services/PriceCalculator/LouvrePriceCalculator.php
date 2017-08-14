@@ -33,42 +33,35 @@ class LouvrePriceCalculator
 	 */
 	public function calculatePrice($type, $birthdate, $reducedPrice)
 	{
-		// Return reduced price if checkbox checked
-		if ($reducedPrice)
-		{
-			// Return half of the price if ticket type attr = 'halfDay'
-			return $type == 'fullDay' ? $this::RATE_REDUCED : ($this::RATE_REDUCED/2);
-		}
-
 		// AgeCalculator service is called to calculate age
 		$age = $this->ageCalculator->calculateAge($birthdate);
 
-		// Return senior price if visitor is 60 years old and more
-		if ($age >= 60)
+		switch ($age)
 		{
-			// Return half of the price if ticket type attr = 'halfDay'
-			return $type == 'fullDay' ? $this::RATE_SENIOR : ($this::RATE_SENIOR/2);
-		}
+			case $reducedPrice:
+				// Return half of the price if ticket type attr = 'halfDay'
+				return $type == 'fullDay' ? $this::RATE_REDUCED : ($this::RATE_REDUCED/2);
+				break;
 
-		// Return normal price if visitor is 12 to 60 years old
-		if ($age >= 12 AND $age < 60)
-		{
-			// Return half of the price if ticket type attr = 'halfDay'
-			return $type == 'fullDay' ? $this::RATE_NORMAL : ($this::RATE_NORMAL/2);
-		}
+			case $age >= 60:
+				// Return half of the price if ticket type attr = 'halfDay'
+				return $type == 'fullDay' ? $this::RATE_SENIOR : ($this::RATE_SENIOR/2);
+				break;
 
-		// Return child price if visitor is 4 to 12 years old
-		if ($age >=4 AND $age < 12)
-		{
-			// Return half of the price if ticket type attr = 'halfDay'
-			return $type == 'fullDay' ? $this::RATE_CHILD : ($this::RATE_CHILD/2);
-		}
+			case $age >= 12 && $age < 60:
+				// Return half of the price if ticket type attr = 'halfDay'
+				return $type == 'fullDay' ? $this::RATE_NORMAL : ($this::RATE_NORMAL/2);
+				break;
 
-		// Return baby price if visitor is less than 4 years old
-		if ($age < 4)
-		{
-			// Return half of the price if ticket type attr = 'halfDay'
-			return $type =='fullDay' ? $this::RATE_BABY : ($this::RATE_BABY/2);
+			case $age >=4 && $age < 12:
+				// Return half of the price if ticket type attr = 'halfDay'
+				return $type == 'fullDay' ? $this::RATE_CHILD : ($this::RATE_CHILD/2);
+				break;
+
+			case $age < 4:
+				// Return half of the price if ticket type attr = 'halfDay'
+				return $type =='fullDay' ? $this::RATE_BABY : ($this::RATE_BABY/2);
+				break;
 		}
 	}
 
