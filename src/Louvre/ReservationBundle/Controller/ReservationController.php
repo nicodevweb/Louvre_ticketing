@@ -52,11 +52,13 @@ class ReservationController extends Controller
 
 	public function ticketingAction(Request $request)
 	{
-		if ($request->getSession()->get('reservation') == NULL)
+		// This action needs to get the date and ticket type stored in Reservation
+		// Check if Reservation's session exists
+		if ($request->getSession()->get('reservation') == '')
 		{
 			throw new \Exception();
 		}
-		
+
 		// Ticketing view reservation form, based on Reservation object's session
 		$reservationForm = $this->createForm(ReservationType::class, $request->getSession()->get('reservation'), array('ticket' => true));
 
@@ -96,7 +98,15 @@ class ReservationController extends Controller
 
 	public function confirmationAction(Request $request)
 	{
-		if ($request->getSession()->get('reservation') == NULL)
+		// This action needs to get :
+		// Date and ticket type from Reservation (already checked previous action)
+		// At least one hydrated Ticket stored in Reservation's array collection
+		// Reservation's total price
+		$reservation = $request->getSession()->get('reservation');
+		$nbTickets = $reservation->getTickets()->count();
+		$totalPrice = $reservation->getTotalPrice();
+
+		if ($reservation == '' || $nbTickets <= 0 || $totalPrice <= 0)
 		{
 			throw new \Exception();
 		}
@@ -106,7 +116,10 @@ class ReservationController extends Controller
 
 	public function paymentAction(Request $request)
 	{
-		if ($request->getSession()->get('reservation') == NULL)
+		// This action can only be called from confirmationAction
+		$referer = $request->headers->get('referer');
+
+		if ($referer !== 'http://localhost/Louvre_ticketing/web/confirmation' && $referer !== 'http://localhost/Louvre_ticketing/web/app_dev.php/confirmation')
 		{
 			throw new \Exception();
 		}
@@ -116,7 +129,10 @@ class ReservationController extends Controller
 
 	public function checkoutAction(Request $request)
 	{
-		if ($request->getSession()->get('reservation') == NULL)
+		// This action can only be called from paymentAction
+		$referer = $request->headers->get('referer');
+
+		if ($referer !== 'http://localhost/Louvre_ticketing/web/payment' && $referer !== 'http://localhost/Louvre_ticketing/web/app_dev.php/payment')
 		{
 			throw new \Exception();
 		}
@@ -167,7 +183,10 @@ class ReservationController extends Controller
 
 	public function validationAction(Request $request)
 	{
-		if ($request->getSession()->get('reservation') == NULL)
+		// This action can only be called from paymentAction
+		$referer = $request->headers->get('referer');
+
+		if ($referer !== 'http://localhost/Louvre_ticketing/web/payment' && $referer !== 'http://localhost/Louvre_ticketing/web/app_dev.php/payment')
 		{
 			throw new \Exception();
 		}

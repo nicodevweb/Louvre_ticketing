@@ -54,7 +54,11 @@ $(document).ready(function () {
 		var prototype = $(template);
 
 		// Add a delete link to delete ticket
-		addDeleteLink(prototype);
+		// It is not possible to delete first ticket
+		if (index !== 0)
+		{
+			addDeleteLink(prototype);
+		}
 
 		// Add prototype in the end of container div tag
 		container.append(prototype);
