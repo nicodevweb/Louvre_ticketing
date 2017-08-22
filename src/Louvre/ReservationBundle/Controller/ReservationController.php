@@ -116,12 +116,10 @@ class ReservationController extends Controller
 
 	public function paymentAction(Request $request)
 	{
-		// This action can only be called from confirmationAction
-		$referer = $request->headers->get('referer');
-
-		if ($referer !== 'http://localhost/Louvre_ticketing/web/confirmation' && $referer !== 'http://localhost/Louvre_ticketing/web/app_dev.php/confirmation')
+		// This action needs to get Reservation's total price
+		if ($request->getSession()->get('reservation')->getTotalPrice() == NULL)
 		{
-			throw new \Exception();
+			throw new \Exception('Vous ne pouvez pas accéder à cette page de cette manière');
 		}
 
 		return $this->render('LouvreReservationBundle:Reservation:payment.html.twig');
@@ -129,14 +127,6 @@ class ReservationController extends Controller
 
 	public function checkoutAction(Request $request)
 	{
-		// This action can only be called from paymentAction
-		$referer = $request->headers->get('referer');
-
-		if ($referer !== 'http://localhost/Louvre_ticketing/web/payment' && $referer !== 'http://localhost/Louvre_ticketing/web/app_dev.php/payment')
-		{
-			throw new \Exception();
-		}
-
 		\Stripe\Stripe::setApiKey('sk_test_SJviYGmyjoe9FathSOqpy6tF');
 
         // Get the credit card details submitted by the form
@@ -167,6 +157,7 @@ class ReservationController extends Controller
             	$em->persist($ticket);
             }
 
+			// $em->persist($request->getSession()->get('reservation'));
             $em->flush();
 
             $this->addFlash('success', 'Merci pour votre achat !');
@@ -183,12 +174,14 @@ class ReservationController extends Controller
 
 	public function validationAction(Request $request)
 	{
-		// This action can only be called from paymentAction
-		$referer = $request->headers->get('referer');
+		// This action needs to get :
+		// Reservation from database (find by code)
+		$code = $request->getSession()->get('reservation')->getCode();
+		$reservation = $this->getDoctrine()->getManager()->getRepository('LouvreReservationBundle:Reservation')->findByCode($code);
 
-		if ($referer !== 'http://localhost/Louvre_ticketing/web/payment' && $referer !== 'http://localhost/Louvre_ticketing/web/app_dev.php/payment')
+		if ($reservation == NULL)
 		{
-			throw new \Exception();
+			throw new \Exception('Aucun paiement n\'a été effecté');
 		}
 
 		// Get reservation's info to prepare email and session reset before rendering
