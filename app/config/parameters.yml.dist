@@ -12,8 +12,8 @@ parameters:
 
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
-    mailer_user: "nicolasgindre@gmail"
-    mailer_password: Metroboulotdodo87
+    mailer_user: your@email.com
+    mailer_password: yourpassword
     mailer_encryption: tls
     mailer_auth_mode: plain
 
