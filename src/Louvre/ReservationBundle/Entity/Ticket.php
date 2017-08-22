@@ -75,7 +75,7 @@ class Ticket
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Reservation", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Reservation", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $reservation;

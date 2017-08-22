@@ -153,11 +153,9 @@ class ReservationController extends Controller
             {
             	// Set Reservation in Ticket's attribute
             	$ticket->setReservation($request->getSession()->get('reservation'));
-
-            	$em->persist($ticket);
             }
 
-			// $em->persist($request->getSession()->get('reservation'));
+			$em->persist($request->getSession()->get('reservation'));
             $em->flush();
 
             $this->addFlash('success', 'Merci pour votre achat !');

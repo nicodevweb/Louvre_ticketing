@@ -58,6 +58,8 @@ class Reservation
     /**
      * @var array
      *
+     * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="reservation", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
     private $tickets;
