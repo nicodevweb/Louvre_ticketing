@@ -56,7 +56,7 @@ class ReservationController extends Controller
 		// Check if Reservation's session exists
 		if ($request->getSession()->get('reservation') == '')
 		{
-			throw new \Exception();
+			throw new \Exception('Vous ne pouvez pas accéder à cette page de cette manière');
 		}
 
 		// Ticketing view reservation form, based on Reservation object's session
